@@ -1,0 +1,64 @@
+<resources>
+    <string name="app_name">GWT</string>
+    <string name="globalwidetech">Global Wide Tech</string>
+    <string name="cadastro">Cadastro</string>
+    <string name="nome">Nome</string>
+    <string name="senha">Senha</string>
+    <string name="confSenha">Confirmar Senha</string>
+
+    <string name="email">Email</string>
+    <string name="confirmar">Confirmar</string>
+    <string name="cliqueaqui">Clique Aqui</string>
+    <string name="FazerRegistro">Ainda não tem cadastro?</string>
+
+    <string name="cad">Cadastrar</string>
+    <string name="vis">Visualizar</string>
+    <string name="salvar">SALVAR</string>
+    <string name="limpar">LIMPAR</string>
+    <string name="excluir">EXCLUIR</string>
+
+
+    <string name="Cliente">Clientes</string>
+    <string name="Servico">Serviço</string>
+    <string name="Contratos">Contratos</string>
+    <string name="hoje">Atividades de Hoje</string>
+
+    <string name="diaria">Atividades Diárias</string>
+    <string name="title_activity_principal">Principal</string>
+    <string name="title_activity_cliente_principal">ClientePrincipal</string>
+
+    <string name="sobre">Sobre a Global Wide Tech</string>
+    <string name="sobreDesc">A GWT é uma empresa de desenvolvimento de sistemas,
+    criada por estudantes do ensino médio</string>
+
+    <string name="versao">Versão 1.0</string>
+    <string name="perfil">Seu Perfil</string>
+    <string name="tel">Telefone</string>
+    <string name="end">Endereço</string>
+    <string name="cpf">CPF</string>
+
+    <string name="desc">Descrição</string>
+    <string name="valor">Valor</string>
+    <string name="DI">Data Inicio</string>
+    <string name="DF">Data Final</string>
+    <string name="cli">Cod Cliente</string>
+
+    <string name="mobile">Mobile</string>
+    <string name="infra">Infraestrutura</string>
+    <string name="site">Site</string>
+    <string name="sistema">Sistema</string>
+    <string name="banco">Banco de dados</string>
+
+    <string name="title_activity_vis_cliente">VisCliente</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="title_activity_vis_contrato">VisContrato</string>
+
+
+</resources>

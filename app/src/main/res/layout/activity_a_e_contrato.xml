@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".CadContrato">
+
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center"
+        android:background="#010B47"
+        android:textColorHint="@color/design_default_color_background"
+        android:textSize="28sp"
+        android:hint="@string/Contratos" />
+
+
+    <EditText
+        android:id="@+id/editCodCont"
+        android:layout_width="190px"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:ems="10"
+        android:inputType="number" />
+
+
+    <EditText
+        android:id="@+id/editNomeCont"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:hint="@string/nome"
+        android:ems="10"
+        android:inputType="textPersonName" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/editDICont"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:hint="@string/DI"
+            android:ems="10"
+            android:layout_weight="1"
+            android:inputType="date" />
+
+        <EditText
+            android:id="@+id/editDFCont"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/DF"
+            android:layout_marginRight="20dp"
+            android:layout_weight="1"
+            android:ems="10"
+            android:inputType="date" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/editCliCont"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_weight="1"
+            android:hint="@string/cli"
+            android:ems="10"
+            android:inputType="number" />
+
+        <EditText
+            android:id="@+id/editValorCont"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/valor"
+            android:layout_marginRight="20dp"
+            android:ems="10"
+            android:layout_weight="1"
+            android:inputType="numberDecimal" />
+
+
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/editDescCont"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:hint="@string/desc"
+        android:ems="10"
+        android:inputType="textPersonName" />
+
+    <CheckBox
+        android:id="@+id/ckBanco"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="20dp"
+        android:textSize="18dp"
+        android:hint="@string/banco" />
+
+    <CheckBox
+        android:id="@+id/ckMobile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:textSize="18dp"
+        android:hint="@string/mobile" />
+
+    <CheckBox
+        android:id="@+id/ckInfra"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:textSize="18dp"
+        android:hint="@string/infra" />
+
+
+    <CheckBox
+        android:id="@+id/ckSistema"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:textSize="18dp"
+        android:hint="@string/sistema" />
+
+    <CheckBox
+        android:id="@+id/ckSite"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:textSize="18dp"
+        android:hint="@string/site" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:orientation="horizontal">
+
+
+        <Button
+            android:id="@+id/btnSalvarContrato"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/botaocli"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:onClick="atualiza"
+            android:textColorHint="@color/design_default_color_background"
+            android:hint="@string/salvar"
+            tools:ignore="OnClick" />
+
+        <Button
+            android:id="@+id/btnExcluirContrato"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:background="@drawable/botaocli"
+            android:hint="@string/excluir"
+            android:textColorHint="@color/design_default_color_background"
+            android:layout_weight="1" />
+
+    </LinearLayout>
+
+
+
+
+
+</LinearLayout>
