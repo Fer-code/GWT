@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +21,7 @@ import java.util.List;
 public class VisContrato extends AppCompatActivity {
 
     ListView listViewContratos;
+    List<Contrato> contratos;
 
     ArrayAdapter<String> adapter;
     ArrayList<String> arrayList;
@@ -48,13 +50,11 @@ public class VisContrato extends AppCompatActivity {
 
         listViewContratos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+            public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
                 
                 Contrato c = new Contrato();
 
-                int id_To_Search = (c.getCodCon() );
-
-                //int id_To_Search = arg2 + 1;
+                int id_To_Search = contratos.get(position).codCon;
 
 
                 Bundle dataBundle = new Bundle();
@@ -72,8 +72,15 @@ public class VisContrato extends AppCompatActivity {
     }
 
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        ListarContrato();
+    }
+
+
     public void ListarContrato(){
-        List<Contrato> contratos = db.listaTodosContratos();
+        contratos = db.listaTodosContratos();
 
         arrayList = new ArrayList<String>();
 

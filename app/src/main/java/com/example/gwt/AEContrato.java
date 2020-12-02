@@ -49,19 +49,21 @@ public class AEContrato extends AppCompatActivity {
         if (extras != null) {
             int Value = extras.getInt("id");
 
+            contrato = new Contrato();
+
             if (Value > 0) {
 
                 Cursor rs = db.getData(Value);
                 id_To_Update = Value;
-                rs.moveToFirst();
-                contrato = new Contrato();
 
-                contrato.setNomeCon(rs.getString(rs.getColumnIndex(db.CONTRATO_COLUMN_NOME)));
-                contrato.setDICon(rs.getString(rs.getColumnIndex(db.CONTRATO_COLUMN_DI)));
-                contrato.setDFCon(rs.getString(rs.getColumnIndex(db.CONTRATO_COLUMN_DF)));
-                contrato.setFkCli(rs.getInt(rs.getColumnIndex(db.CONTRATO_COLUMN_CLIENTE)));
-                contrato.setValorCon(rs.getDouble(rs.getColumnIndex(db.CONTRATO_COLUMN_VALOR)));
-                contrato.setDescCon(rs.getString(rs.getColumnIndex(db.CONTRATO_COLUMN_DESC)));
+                if  (rs.moveToFirst()) {
+                    contrato.setNomeCon(rs.getString(rs.getColumnIndex(db.CONTRATO_COLUMN_NOME)));
+                    contrato.setDICon(rs.getString(rs.getColumnIndex(db.CONTRATO_COLUMN_DI)));
+                    contrato.setDFCon(rs.getString(rs.getColumnIndex(db.CONTRATO_COLUMN_DF)));
+                    contrato.setFkCli(rs.getInt(rs.getColumnIndex(db.CONTRATO_COLUMN_CLIENTE)));
+                    contrato.setValorCon(rs.getDouble(rs.getColumnIndex(db.CONTRATO_COLUMN_VALOR)));
+                    contrato.setDescCon(rs.getString(rs.getColumnIndex(db.CONTRATO_COLUMN_DESC)));
+                }
 
             }
             else{
