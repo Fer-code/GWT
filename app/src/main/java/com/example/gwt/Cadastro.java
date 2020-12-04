@@ -64,7 +64,7 @@ public class Cadastro extends AppCompatActivity {
 
                 }
                 else {
-                    db.addUsuario(new Usuario(nome1, telefone, email1, senha1));
+                    db.addUsuario(new Usuario(nome1, email1,telefone, senha1));
                     Toast.makeText(Cadastro.this, "adicionado com sucesso", Toast.LENGTH_SHORT).show();
 
                     Intent intent = new Intent(Cadastro.this, MainActivity.class);
@@ -79,11 +79,12 @@ public class Cadastro extends AppCompatActivity {
     public void Conf(View c){
         Intent intent = new Intent(Cadastro.this, MainActivity.class);
         startActivity(intent);
+
     }
 
 
     //~~~~~~~~~~~~~~~~~~~~SAVEINSTANCE~~~~~~~~~~~~~~~~~~
-    /*
+
 
     @Override
     public void onSaveInstanceState(Bundle saveInstance) {
@@ -109,6 +110,6 @@ public class Cadastro extends AppCompatActivity {
         tel.setText(tellRecuperado);
         senha.setText(senhaRecuperado);
         confSenha.setText(csenhaRecuperado);
-    }*/
+    }
 
 }

@@ -15,16 +15,18 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.List;import androidx.annotation.Nullable;
+
 
 public class VisContrato extends AppCompatActivity {
 
     ListView listViewContratos;
+    List<Contrato> contratos;
+
 
     ArrayAdapter<String> adapter;
     ArrayList<String> arrayList;
 
-    boolean position;
 
     DBHelper db = new DBHelper(this);
 
@@ -43,18 +45,17 @@ public class VisContrato extends AppCompatActivity {
             public void onClick(View view) {
                 Intent it = new Intent(VisContrato.this,CadContrato.class);
                 startActivity(it);
+                finish();
             }
         });
 
         listViewContratos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+            public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
                 
                 Contrato c = new Contrato();
 
-                int id_To_Search = (c.getCodCon() );
-
-                //int id_To_Search = arg2 + 1;
+                int id_To_Search = contratos.get(position).codCon;
 
 
                 Bundle dataBundle = new Bundle();
@@ -65,7 +66,6 @@ public class VisContrato extends AppCompatActivity {
                 intent.putExtras(dataBundle);
                 startActivity(intent);
                 finish();
-
             }
         });
 
@@ -73,7 +73,7 @@ public class VisContrato extends AppCompatActivity {
 
 
     public void ListarContrato(){
-        List<Contrato> contratos = db.listaTodosContratos();
+        contratos = db.listaTodosContratos();
 
         arrayList = new ArrayList<String>();
 
@@ -86,9 +86,17 @@ public class VisContrato extends AppCompatActivity {
          arrayList.add(c.getCodCon() + " - " + c.getNomeCon() + " - Entrega: " + c.getDFCon() );
             adapter.notifyDataSetChanged();
         }
-
-
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        ListarContrato();
+    }
+
+    public void TelaBuscar(View s){
+        Intent intent = new Intent(VisContrato.this, BuscaContrato.class);
+        startActivity(intent);
+    }
 
 }

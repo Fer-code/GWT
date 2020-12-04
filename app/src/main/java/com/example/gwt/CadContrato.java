@@ -74,7 +74,6 @@ public class CadContrato extends AppCompatActivity {
             gostos += " Site,";
         }
 
-
         String nomeC = nome.getText().toString();
         String DataInicio = DataI.getText().toString();
         String DataFinal = DataF.getText().toString();
@@ -82,13 +81,12 @@ public class CadContrato extends AppCompatActivity {
         String valorC = valor.getText().toString();
         String descC = desc.getText().toString();
 
-
         if (gostos.isEmpty() || nomeC.isEmpty() || DataInicio.isEmpty() ||
                 DataFinal.isEmpty() || CodCliC.isEmpty() || valorC.isEmpty() || descC.isEmpty()) {
             Toast.makeText(this, "Insira os dados corretamente", Toast.LENGTH_SHORT).show();
         }
         else{
-            db.addContrato(new Contrato(nomeC, descC, Double.parseDouble(valorC), DataInicio, DataFinal, Integer.parseInt(CodCliC)));
+            db.addContrato(new Contrato(nomeC, descC, Double.parseDouble(valorC), DataInicio, DataFinal, gostos, Integer.parseInt(CodCliC)));
             Toast.makeText(CadContrato.this, "Tudo certo", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(this, VisContrato.class);
             startActivity(intent);
@@ -102,7 +100,7 @@ public class CadContrato extends AppCompatActivity {
 
     //~~~~~~~~~~~~~~~~~~~SAVEINSTANCE~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-    /*
+
     @Override
     public void onSaveInstanceState(Bundle saveInstance) {
         super.onSaveInstanceState(saveInstance);
@@ -132,7 +130,7 @@ public class CadContrato extends AppCompatActivity {
         valor.setText(CONVRecuperado);
         desc.setText(CONDESCRecuperado);
     }
-*/
+
 
 
 }

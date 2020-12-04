@@ -9,6 +9,9 @@ import android.widget.Toast;
 
 public class Menu extends AppCompatActivity {
 
+    public static final String EXTRA_MESSAGE_COD = "CODU" ;
+     int cg;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -17,11 +20,13 @@ public class Menu extends AppCompatActivity {
         getSupportActionBar().hide();
 
         Bundle extras = getIntent().getExtras();
+        if(extras!= null) {
 
-        String cod = extras.getString(MainActivity.EXTRA_MESSAGE_COD);
+            String cod = extras.getString(MainActivity.EXTRA_MESSAGE_COD);
 
-        final String cg = String.valueOf(cod);
-        Toast.makeText(this, cg, Toast.LENGTH_SHORT).show();
+            cg = Integer.parseInt(cod);
+
+        }
 
     }
     public void Sair(View s){
@@ -29,8 +34,13 @@ public class Menu extends AppCompatActivity {
         startActivity(intent);
     }
     public void Perfil(View s){
+        Bundle dataBundle = new Bundle();
+        dataBundle.putInt("id", cg);
+
         Intent intent = new Intent(Menu.this, PerfilSocio.class);
+        intent.putExtras(dataBundle);
         startActivity(intent);
+
     }
 
     public void CadastrarClientes(View s){

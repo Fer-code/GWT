@@ -164,7 +164,7 @@ public class CadCliente extends AppCompatActivity {
 
 
         //SAVEINSTANCE
-    /*
+
     @Override
     public void onSaveInstanceState(Bundle saveInstance) {
         super.onSaveInstanceState(saveInstance);
@@ -189,5 +189,5 @@ public class CadCliente extends AppCompatActivity {
         editTelefone.setText(clitellRecuperado);
         editEnd.setText(cliendRecuperado);
         editCPF.setText(clicpfRecuperado);
-    }*/
+    }
 }

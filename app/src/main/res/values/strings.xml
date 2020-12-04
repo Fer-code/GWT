@@ -22,8 +22,9 @@
     <string name="Servico">Serviço</string>
     <string name="Contratos">Contratos</string>
     <string name="hoje">Atividades de Hoje</string>
+    <string name="busca">Busca</string>
 
-    <string name="diaria">Atividades Diárias</string>
+    <string name="diaria">Entregas de Hoje</string>
     <string name="title_activity_principal">Principal</string>
     <string name="title_activity_cliente_principal">ClientePrincipal</string>
 

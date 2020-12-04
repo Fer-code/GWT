@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DBHelper extends SQLiteOpenHelper {
-    public static final String DATABASE_NAME = "gwt.db";
+    public static final String DATABASE_NAME = "gwt";
     public static final int DATABASE_VERSION = 1;
 
     //TABELA SÓCIO
@@ -41,7 +41,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String CONTRATO_COLUMN_VALOR = "valorContrato";
     public static final String CONTRATO_COLUMN_DI = "DIContrato";
     public static final String CONTRATO_COLUMN_DF = "DFContrato";
-    //public static final String CONTRATO_COLUMN_SERVICO = "ServContrato";
+    public static final String CONTRATO_COLUMN_SERVICO = "ServContrato";
     public static final String CONTRATO_COLUMN_CLIENTE= "FKidCli";
     //public static final String CONTRATO_COLUMN_SOCIO = "FKidSocio";
 
@@ -63,9 +63,14 @@ public class DBHelper extends SQLiteOpenHelper {
 
 
         String QUERY_CONTRATO = "CREATE TABLE " + CONTRATO_TABLE_NAME + "( " +
-                CONTRATO_COLUMN_ID + " INTEGER PRIMARY KEY, " + CONTRATO_COLUMN_NOME + " TEXT, " +
-                CONTRATO_COLUMN_DESC + " TEXT, " + CONTRATO_COLUMN_VALOR + " DOUBLE, " +
-                CONTRATO_COLUMN_DI + " TEXT, " + CONTRATO_COLUMN_DF + " TEXT, " + CONTRATO_COLUMN_CLIENTE +" INTEGER, " +
+                CONTRATO_COLUMN_ID + " INTEGER PRIMARY KEY, " +
+                CONTRATO_COLUMN_NOME + " TEXT, " +
+                CONTRATO_COLUMN_DESC + " TEXT, " +
+                CONTRATO_COLUMN_VALOR + " DOUBLE, " +
+                CONTRATO_COLUMN_DI + " TEXT, " +
+                CONTRATO_COLUMN_DF + " TEXT, " +
+                CONTRATO_COLUMN_SERVICO  + " TEXT, "+
+                CONTRATO_COLUMN_CLIENTE +" INTEGER, " +
                 " foreign key (" + CONTRATO_COLUMN_CLIENTE +" ) references "  + CLIENTE_TABLE_NAME + "(" + CLIENTE_COLUMN_ID + "));";
 
         db.execSQL(QUERY_USUARIO);
@@ -137,6 +142,11 @@ public class DBHelper extends SQLiteOpenHelper {
         }
     }
 
+    public Cursor getD(int id) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res =  db.rawQuery( "select * from TBUsuario where idUsuario="+id+"", null );
+        return res;
+    }
 
     //CLIENTE
 
@@ -236,6 +246,7 @@ public class DBHelper extends SQLiteOpenHelper {
         values.put(CONTRATO_COLUMN_VALOR, contrato.getValorCon());
         values.put(CONTRATO_COLUMN_DI, contrato.getDICon());
         values.put(CONTRATO_COLUMN_DF, contrato.getDFCon());
+        values.put(CONTRATO_COLUMN_SERVICO, contrato.getServCon());
         values.put(CONTRATO_COLUMN_CLIENTE, contrato.getFkCli());
 
         db.insert(CONTRATO_TABLE_NAME, null, values);
@@ -251,6 +262,7 @@ public class DBHelper extends SQLiteOpenHelper {
         values.put(CONTRATO_COLUMN_VALOR, contrato.getValorCon());
         values.put(CONTRATO_COLUMN_DI, contrato.getDICon());
         values.put(CONTRATO_COLUMN_DF, contrato.getDFCon());
+        values.put(CONTRATO_COLUMN_SERVICO, contrato.getServCon());
         values.put(CONTRATO_COLUMN_CLIENTE, contrato.getFkCli());
 
         db.update(CONTRATO_TABLE_NAME, values, CONTRATO_COLUMN_ID + " = ?",
@@ -265,14 +277,13 @@ public class DBHelper extends SQLiteOpenHelper {
                 new String[] { Integer.toString(id) });
     }
 
-
     Contrato selecionarContrato(int codigo){
 
         SQLiteDatabase db = this.getReadableDatabase();
 
         Cursor cursor = db.query(CONTRATO_TABLE_NAME, new String[]{CONTRATO_COLUMN_ID,
                         CONTRATO_COLUMN_NOME, CONTRATO_COLUMN_DESC, CONTRATO_COLUMN_VALOR,
-                        CONTRATO_COLUMN_DI, CONTRATO_COLUMN_DF, CONTRATO_COLUMN_CLIENTE }, CONTRATO_COLUMN_ID + " = ?",
+                        CONTRATO_COLUMN_DI, CONTRATO_COLUMN_DF, CONTRATO_COLUMN_SERVICO,  CONTRATO_COLUMN_CLIENTE }, CONTRATO_COLUMN_ID + " = ?",
                 new String[] {String.valueOf(codigo)}, null, null, null, null);
 
 
@@ -282,12 +293,11 @@ public class DBHelper extends SQLiteOpenHelper {
 
         Contrato contrato = new Contrato(Integer.parseInt(cursor.getString(0)),
                 cursor.getString(1), cursor.getString(2), Double.parseDouble(cursor.getString(3)),
-                cursor.getString(4), cursor.getString(5) , Integer.parseInt(cursor.getString(6)));
+                cursor.getString(4), cursor.getString(5) , cursor.getString(6),
+                Integer.parseInt(cursor.getString(8)));
 
         return contrato;
     }
-
-
 
     public List<Contrato> listaTodosContratos (){
         List<Contrato> listaContrato    = new ArrayList<Contrato>();
@@ -305,7 +315,8 @@ public class DBHelper extends SQLiteOpenHelper {
                 contrato.setValorCon(Double.parseDouble(c.getString(3)));
                 contrato.setDICon(c.getString(4));
                 contrato.setDFCon(c.getString(5));
-                contrato.setFkCli(Integer.parseInt(c.getString(6)));
+                contrato.setServCon(c.getString(6));
+                contrato.setFkCli(Integer.parseInt(c.getString(7)));
 
                 listaContrato.add(contrato);
             }while(c.moveToNext());
@@ -337,6 +348,29 @@ public class DBHelper extends SQLiteOpenHelper {
 
         return cod;
 
+    }
+
+    public List buscaContrato(String nome){
+            String sql_busca_contratos = "SELECT * FROM TBcontrato WHERE nomeContrato = " + "'" + nome + "'";
+            SQLiteDatabase db = getReadableDatabase();
+
+            Cursor c = db.rawQuery(sql_busca_contratos, null);
+
+            List<Contrato> contratos = new ArrayList<>();
+
+            while(c.moveToNext()){
+
+                    Contrato contrato = new Contrato();
+                    contrato.setNomeCon(c.getString(c.getColumnIndex("nomeContrato")));
+                    contrato.setCodCon(c.getInt(c.getColumnIndex("idContrato")));
+                    contrato.setDFCon(c.getString(c.getColumnIndex("DFContrato")));
+
+                contratos.add(contrato);
+            }
+            db.close();
+            c.close();
+
+        return contratos;
     }
 
 }

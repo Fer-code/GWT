@@ -15,9 +15,8 @@ public class AEContrato extends AppCompatActivity {
 
     int id_To_Update = 0;
     Contrato contrato;
-    CheckBox Banco, mobile, infra, sistema, site;
     Button btnAtualizar, btnExcluir;
-    EditText nome, DataI, DataF, CodCli, valor, desc, codigo;
+    EditText nome, DataI, DataF, CodCli, valor, desc, serv;
 
     DBHelper db = new DBHelper(this);
 
@@ -28,47 +27,41 @@ public class AEContrato extends AppCompatActivity {
 
         getSupportActionBar().hide();
 
-        Banco = findViewById(R.id.ckBanco);
-        mobile = findViewById(R.id.ckMobile);
-        infra = findViewById(R.id.ckInfra);
-        sistema = findViewById(R.id.ckSistema);
-        site = findViewById(R.id.ckSite);
-
         btnAtualizar = findViewById(R.id.btnSalvarContrato);
         btnExcluir = findViewById(R.id.btnExcluirContrato);
 
-        codigo = findViewById(R.id.editCodCont);
         nome = findViewById(R.id.editNomeCont);
         DataI = findViewById(R.id.editDICont);
         DataF = findViewById(R.id.editDFCont);
         CodCli = findViewById(R.id.editCliCont);
         valor = findViewById(R.id.editValorCont);
+        serv = findViewById(R.id.editServCont);
         desc = findViewById(R.id.editDescCont);
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             int Value = extras.getInt("id");
 
+            contrato = new Contrato();
+
             if (Value > 0) {
 
                 Cursor rs = db.getData(Value);
                 id_To_Update = Value;
-                rs.moveToFirst();
-                contrato = new Contrato();
-
-                contrato.setNomeCon(rs.getString(rs.getColumnIndex(db.CONTRATO_COLUMN_NOME)));
-                contrato.setDICon(rs.getString(rs.getColumnIndex(db.CONTRATO_COLUMN_DI)));
-                contrato.setDFCon(rs.getString(rs.getColumnIndex(db.CONTRATO_COLUMN_DF)));
-                contrato.setFkCli(rs.getInt(rs.getColumnIndex(db.CONTRATO_COLUMN_CLIENTE)));
-                contrato.setValorCon(rs.getDouble(rs.getColumnIndex(db.CONTRATO_COLUMN_VALOR)));
-                contrato.setDescCon(rs.getString(rs.getColumnIndex(db.CONTRATO_COLUMN_DESC)));
+                if  (rs.moveToFirst()) {
+                    contrato.setNomeCon(rs.getString(rs.getColumnIndex(db.CONTRATO_COLUMN_NOME)));
+                    contrato.setDICon(rs.getString(rs.getColumnIndex(db.CONTRATO_COLUMN_DI)));
+                    contrato.setDFCon(rs.getString(rs.getColumnIndex(db.CONTRATO_COLUMN_DF)));
+                    contrato.setFkCli(rs.getInt(rs.getColumnIndex(db.CONTRATO_COLUMN_CLIENTE)));
+                    contrato.setValorCon(rs.getDouble(rs.getColumnIndex(db.CONTRATO_COLUMN_VALOR)));
+                    contrato.setServCon(rs.getString(rs.getColumnIndex(db.CONTRATO_COLUMN_SERVICO)));
+                    contrato.setDescCon(rs.getString(rs.getColumnIndex(db.CONTRATO_COLUMN_DESC)));
+                }
 
             }
             else{
                 Toast.makeText(AEContrato.this, "Algo deu errado", Toast.LENGTH_SHORT).show();
             }
-
-
 
             nome.setText(contrato.getNomeCon());
 
@@ -80,20 +73,11 @@ public class AEContrato extends AppCompatActivity {
 
             valor.setText(Double.toString(contrato.getValorCon()));
 
+            serv.setText(contrato.getServCon());
+
             desc.setText(contrato.getDescCon());
 
-
-
         }
-
-
-        String nomeC = nome.getText().toString();
-        String DataInicio = DataI.getText().toString();
-        String DataFinal = DataF.getText().toString();
-        String CodCliC = CodCli.getText().toString();
-        String valorC = valor.getText().toString();
-        String descC = desc.getText().toString();
-
 
         btnExcluir.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -105,9 +89,9 @@ public class AEContrato extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(),VisContrato.class);
                 startActivity(intent);
 
+                finish();
             }
         });
-
     }
 
     public void atualiza(View a) {
@@ -122,6 +106,7 @@ public class AEContrato extends AppCompatActivity {
                         Double.parseDouble(valor.getText().toString()),
                         DataI.getText().toString(),
                         DataF.getText().toString(),
+                        serv.getText().toString(),
                         Integer.parseInt(CodCli.getText().toString())));
 
                     Toast.makeText(getApplicationContext(), "Atualizado", Toast.LENGTH_SHORT).show();
