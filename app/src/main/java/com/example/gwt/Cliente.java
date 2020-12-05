@@ -7,11 +7,11 @@ public class Cliente {
     String email;
     String telefone;
     String end;
-    int cpf;
+    String cpf;
 
     public Cliente(){}
 
-    public Cliente(int _codigo, String _nome,  String _email, String _telefone, String _end, int _cpf){
+    public Cliente(int _codigo, String _nome,  String _email, String _telefone, String _end, String _cpf){
         this.codigo = _codigo;
         this.nome = _nome;
         this.email = _email;
@@ -20,7 +20,7 @@ public class Cliente {
         this.cpf = _cpf;
     }
 
-    public Cliente(String _nome,  String _email, String _telefone, String _end, int _cpf){
+    public Cliente(String _nome,  String _email, String _telefone, String _end, String _cpf){
         this.nome = _nome;
         this.email = _email;
         this.telefone = _telefone;
@@ -68,11 +68,11 @@ public class Cliente {
         this.end = end;
     }
 
-    public int getCpf() {
+    public String getCpf() {
         return cpf;
     }
 
-    public void setCpf(int cpf) {
+    public void setCpf(String cpf) {
         this.cpf = cpf;
     }
 }

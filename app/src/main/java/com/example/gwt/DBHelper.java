@@ -43,7 +43,6 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String CONTRATO_COLUMN_DF = "DFContrato";
     public static final String CONTRATO_COLUMN_SERVICO = "ServContrato";
     public static final String CONTRATO_COLUMN_CLIENTE= "FKidCli";
-    //public static final String CONTRATO_COLUMN_SOCIO = "FKidSocio";
 
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -85,6 +84,14 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + USUARIO_TABLE_NAME + ";" );
         db.execSQL("DROP TABLE IF EXISTS " + CONTRATO_TABLE_NAME + ";" );
         onCreate(db);
+    }
+
+    @Override
+    public void onOpen(SQLiteDatabase db) {
+        super.onOpen(db);
+        if(!db.isReadOnly()){
+            db.execSQL("PRAGMA foreign_keys=ON;");
+        }
     }
 
     void addUsuario (Usuario usuario){
@@ -189,7 +196,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
         Cliente cliente = new Cliente(Integer.parseInt(cursor.getString(0)),
                 cursor.getString(1), cursor.getString(2), cursor.getString(3),
-                cursor.getString(4), Integer.parseInt(cursor.getString(5)));
+                cursor.getString(4), cursor.getString(5));
 
         return cliente;
     }
@@ -225,7 +232,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 cliente.setTelefone(c.getString(2));
                 cliente.setEmail(c.getString(3));
                 cliente.setEnd(c.getString(4));
-                cliente.setCpf(Integer.parseInt(c.getString(5)));
+                cliente.setCpf(c.getString(5));
 
                 listaClientes.add(cliente);
             }while(c.moveToNext());

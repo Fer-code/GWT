@@ -65,7 +65,6 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-
         <EditText
             android:id="@+id/editTelefone"
             android:layout_width="match_parent"
@@ -87,8 +86,8 @@
             android:ems="10"
             android:hint="@string/cpf"
             android:inputType="number" />
-
     </LinearLayout>
+
 
 
     <LinearLayout

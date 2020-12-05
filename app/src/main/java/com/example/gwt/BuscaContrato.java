@@ -2,9 +2,11 @@ package com.example.gwt;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -13,6 +15,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BuscaContrato extends AppCompatActivity {
+
+    private final String BUSCA_NOME = "com.example.gwt.BUSCA";
 
     DBHelper db = new DBHelper(this);
     ListView listViewBusca;
@@ -34,7 +38,26 @@ public class BuscaContrato extends AppCompatActivity {
 
         getSupportActionBar().hide();
         DBHelper db = new DBHelper(this);
-        //Buscar();
+
+        listViewBusca.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
+
+                Contrato c = new Contrato();
+
+                int id_To_Search = contratos.get(position).codCon;
+
+
+                Bundle dataBundle = new Bundle();
+                dataBundle.putInt("id", id_To_Search);
+
+                Intent intent = new Intent(getApplicationContext(), AEContrato.class);
+
+                intent.putExtras(dataBundle);
+                startActivity(intent);
+                finish();
+            }
+        });
 
     }
 
@@ -55,5 +78,22 @@ public class BuscaContrato extends AppCompatActivity {
             arrayList.add(c.getCodCon() + " - " + c.getNomeCon() + " - Entrega: " + c.getDFCon() );
             adapter.notifyDataSetChanged();
         }
+    }
+
+    //~~~~~~~~~~~~~~~~~~~SAVEINSTANCE~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+    @Override
+    public void onSaveInstanceState(Bundle saveInstance) {
+        super.onSaveInstanceState(saveInstance);
+        saveInstance.putString(BUSCA_NOME, editBusca.getText().toString());
+    }
+
+    @Override
+    public void onRestoreInstanceState(Bundle savedInstance) {
+        super.onRestoreInstanceState(savedInstance);
+        String BUSCAnomeRecuperado = savedInstance.getString(BUSCA_NOME);
+
+
+        editBusca.setText(BUSCAnomeRecuperado);
     }
 }

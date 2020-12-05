@@ -11,6 +11,8 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.io.IOException;
+
 public class CadContrato extends AppCompatActivity {
 
     private final String CON_NOME = "com.example.gwt.NOMECO";
@@ -49,12 +51,9 @@ public class CadContrato extends AppCompatActivity {
         CodCli = findViewById(R.id.editCliCont);
         valor = findViewById(R.id.editValorCont);
         desc = findViewById(R.id.editDescCont);
-
-
     }
 
     public void teste (View teste) {
-
 
         String gostos = "";
 
@@ -86,20 +85,19 @@ public class CadContrato extends AppCompatActivity {
             Toast.makeText(this, "Insira os dados corretamente", Toast.LENGTH_SHORT).show();
         }
         else{
-            db.addContrato(new Contrato(nomeC, descC, Double.parseDouble(valorC), DataInicio, DataFinal, gostos, Integer.parseInt(CodCliC)));
-            Toast.makeText(CadContrato.this, "Tudo certo", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(this, VisContrato.class);
-            startActivity(intent);
-            finish();
+            try{
+                db.addContrato(new Contrato(nomeC, descC, Double.parseDouble(valorC), DataInicio, DataFinal, gostos, Integer.parseInt(CodCliC)));
+                Intent intent = new Intent(this, VisContrato.class);
+                startActivity(intent);
+                finish();
+            }catch (Exception e){
+                Toast.makeText(CadContrato.this, "Falha ao cadastrar contrato", Toast.LENGTH_SHORT).show();
+            }
+
         }
     }
 
-
-
-
-
     //~~~~~~~~~~~~~~~~~~~SAVEINSTANCE~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
 
     @Override
     public void onSaveInstanceState(Bundle saveInstance) {
@@ -130,8 +128,5 @@ public class CadContrato extends AppCompatActivity {
         valor.setText(CONVRecuperado);
         desc.setText(CONDESCRecuperado);
     }
-
-
-
 }
 

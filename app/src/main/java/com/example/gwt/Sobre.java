@@ -23,7 +23,7 @@ public class Sobre extends AppCompatActivity {
 
     public void verMapa(View mapa)
     {
-        Uri location = Uri.parse("geo: -23.5673388,-46.6875781,20.96z");
+        Uri location = Uri.parse("geo: -23.5484667,-46.7450529?z=17");
         Intent mapIntent = new Intent(Intent.ACTION_VIEW, location);
         startActivity(mapIntent );
     }

@@ -23,7 +23,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         getSupportActionBar().hide();
-
     }
 
     public void Conf(View c) {
@@ -37,13 +36,11 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(this, "Insira os dados corretamente", Toast.LENGTH_SHORT).show();
         } else {
             autenticaUsuario(nome1, senha1);
-
         }
     }
 
 
     private void autenticaUsuario (String nome, String senha){
-
 
         EditText nomes = findViewById(R.id.idNomeUsuario);
         EditText senhas = findViewById(R.id.idSenhaUsuario);
@@ -66,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
             nomes.setText("");
             senhas.setText("");
             nomes.requestFocus();
-            Toast.makeText(this, "Usuario ou senha invãlidos", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Usuario ou senha inválidos", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -78,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
 
     //~~~~~~~~~~~~~~~~~~~~~~~~SAVEINSTANCE~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-    /*
+
     @Override
     public void onSaveInstanceState(Bundle saveInstance) {
         super.onSaveInstanceState(saveInstance);
@@ -95,6 +92,6 @@ public class MainActivity extends AppCompatActivity {
         nome.setText(nomeRecuperado);
         senha.setText(senhaRecuperado);
 
-    }*/
+    }
 
 }

@@ -79,13 +79,13 @@ public class CadCliente extends AppCompatActivity {
                 }
                 else if (codigo.isEmpty()) {
                     //insert
-                    db.addCliente(new Cliente(nome, email, telefone, end, Integer.parseInt(cpf)));
+                    db.addCliente(new Cliente(nome, email, telefone, end, cpf));
                     Toast.makeText(CadCliente.this, "Cliente adicionado com sucesso", Toast.LENGTH_SHORT).show();
                     ListarClientes();
                     LimpaCampos();
 
                 } else {
-                    db.atualizaCliente(new Cliente(Integer.parseInt(codigo), nome, email, telefone, end, Integer.parseInt(cpf)));
+                    db.atualizaCliente(new Cliente(Integer.parseInt(codigo), nome, email, telefone, end, cpf));
 
                     Toast.makeText(CadCliente.this, "Cliente atualizado com sucesso", Toast.LENGTH_SHORT).show();
                     ListarClientes();
@@ -102,13 +102,18 @@ public class CadCliente extends AppCompatActivity {
                 if (codigo.isEmpty()) {
                     Toast.makeText(CadCliente.this, "Nenhum cliente selecionado", Toast.LENGTH_SHORT).show();
                 } else {
-                    Cliente cliente = new Cliente();
-                    cliente.setCodigo(Integer.parseInt(codigo));
-                    db.apagarCliente(cliente);
+                    try{
+                        Cliente cliente = new Cliente();
+                        cliente.setCodigo(Integer.parseInt(codigo));
+                        db.apagarCliente(cliente);
 
-                    Toast.makeText(CadCliente.this, "Cliente excluido com sucesso", Toast.LENGTH_SHORT).show();
-                    ListarClientes();
-                    LimpaCampos();
+                        Toast.makeText(CadCliente.this, "Cliente excluido com sucesso", Toast.LENGTH_SHORT).show();
+                        ListarClientes();
+                        LimpaCampos();
+                    }catch (Exception e){
+                        Toast.makeText(CadCliente.this, "Falha ao excluir cliente", Toast.LENGTH_SHORT).show();
+                    }
+
                 }
             }
         });
@@ -128,7 +133,6 @@ public class CadCliente extends AppCompatActivity {
                 editEmail.setText(cliente.getEmail());
                 editEnd.setText(cliente.getEnd());
                 editCPF.setText(String.valueOf(cliente.getCpf()));
-
             }
         });
     }
@@ -153,13 +157,9 @@ public class CadCliente extends AppCompatActivity {
             listViewClientes.setAdapter(adapter);
 
             for (Cliente c : clientes) {
-                //Log.d("Lista", "\nID: " + c.getCodigo() + " Nome: " + c.getNome());
-
                 arrayList.add(c.getCodigo() +  "-" + c.getNome());
                 adapter.notifyDataSetChanged();
             }
-
-
         }
 
 

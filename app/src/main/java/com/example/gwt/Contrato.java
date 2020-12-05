@@ -10,12 +10,11 @@ public class Contrato {
     String DFCon;
     String ServCon;
     int fkCli;
-    int fkSocio;
 
     public Contrato(){}
 
 
-    public Contrato(int _cod, String _nome,  String _desc, Double _valor, String _DI, String _DF, String _servCon, int _fkCli/*, int _fkSocio*/){
+    public Contrato(int _cod, String _nome,  String _desc, Double _valor, String _DI, String _DF, String _servCon, int _fkCli){
         this.codCon = _cod;
         this.nomeCon = _nome;
         this.descCon = _desc;
@@ -24,11 +23,10 @@ public class Contrato {
         this.DFCon = _DF;
         this.ServCon = _servCon;
         this.fkCli = _fkCli;
-        //this.fkSocio = _fkSocio;
     }
 
 
-    public Contrato( String _nome,  String _desc, Double _valor, String _DI, String _DF, String _servCon, int _fkCli/*, int _fkSocio*/){
+    public Contrato( String _nome,  String _desc, Double _valor, String _DI, String _DF, String _servCon, int _fkCli){
         this.nomeCon = _nome;
         this.descCon = _desc;
         this.valorCon = _valor;
@@ -36,7 +34,6 @@ public class Contrato {
         this.DFCon = _DF;
         this.ServCon = _servCon;
         this.fkCli = _fkCli;
-        //this.fkCli = _fkSocio;
     }
 
     public int getCodCon() {
@@ -103,11 +100,4 @@ public class Contrato {
         ServCon = servCon;
     }
 
-    public int getFkSocio() {
-        return fkSocio;
-    }
-
-    public void setFkSocio(int fkSocio) {
-        this.fkSocio = fkSocio;
-    }
 }

@@ -23,6 +23,7 @@
     <string name="Contratos">Contratos</string>
     <string name="hoje">Atividades de Hoje</string>
     <string name="busca">Busca</string>
+    <string name="buscaNome">Nome do contrato:</string>
 
     <string name="diaria">Entregas de Hoje</string>
     <string name="title_activity_principal">Principal</string>
