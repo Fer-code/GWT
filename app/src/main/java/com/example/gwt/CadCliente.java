@@ -2,8 +2,10 @@ package com.example.gwt;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Service;
 import android.os.Bundle;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -25,6 +27,8 @@ public class CadCliente extends AppCompatActivity {
     EditText editCodigo, editNome, editTelefone, editEmail, editEnd, editCPF;
     Button btnLimpar, btnSalvar, btnExcluir;
     ListView listViewClientes;
+
+    InputMethodManager imm;
 
     ArrayAdapter<String> adapter;
     ArrayList<String> arrayList;
@@ -48,6 +52,8 @@ public class CadCliente extends AppCompatActivity {
         btnLimpar = (Button) findViewById(R.id.btnLimpar);
         btnSalvar = (Button) findViewById(R.id.btnSalvar);
         btnExcluir = (Button) findViewById(R.id.btnExcluir);
+
+        imm = (InputMethodManager) this.getSystemService(Service.INPUT_METHOD_SERVICE);
 
         listViewClientes = (ListView) findViewById(R.id.ListViewClientes);
 
@@ -83,6 +89,7 @@ public class CadCliente extends AppCompatActivity {
                     Toast.makeText(CadCliente.this, "Cliente adicionado com sucesso", Toast.LENGTH_SHORT).show();
                     ListarClientes();
                     LimpaCampos();
+                    escodeTeclado();
 
                 } else {
                     db.atualizaCliente(new Cliente(Integer.parseInt(codigo), nome, email, telefone, end, cpf));
@@ -90,6 +97,7 @@ public class CadCliente extends AppCompatActivity {
                     Toast.makeText(CadCliente.this, "Cliente atualizado com sucesso", Toast.LENGTH_SHORT).show();
                     ListarClientes();
                     LimpaCampos();
+                    escodeTeclado();
                 }
             }
         });
@@ -162,8 +170,11 @@ public class CadCliente extends AppCompatActivity {
             }
         }
 
+    void escodeTeclado(){
+        imm.hideSoftInputFromWindow(editNome.getWindowToken(),0);
+    }
 
-        //SAVEINSTANCE
+    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~SAVEINSTANCE~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     @Override
     public void onSaveInstanceState(Bundle saveInstance) {

@@ -58,8 +58,5 @@ public class Menu extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void AtividadeDiaria(View s){
-        Intent intent = new Intent(Menu.this, AtividadeDiaria.class);
-        startActivity(intent);
-    }
+
 }

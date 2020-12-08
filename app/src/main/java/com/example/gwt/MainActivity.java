@@ -10,10 +10,7 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
-    public static final String EXTRA_MESSAGE_COD = "CODU" ;
-
-    private final String LOGIN_NOME = "com.example.gwt.LOGINNOME";
-    private final String LOGIN_SENHA = "com.example.gwt.LOGINSENHA";
+    public static final String EXTRA_MESSAGE_COD = "CODU";
 
     EditText nome, senha;
 
@@ -71,27 +68,4 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(MainActivity.this, Cadastro.class);
         startActivity(intent);
     }
-
-
-    //~~~~~~~~~~~~~~~~~~~~~~~~SAVEINSTANCE~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-
-    @Override
-    public void onSaveInstanceState(Bundle saveInstance) {
-        super.onSaveInstanceState(saveInstance);
-        saveInstance.putString(LOGIN_NOME, nome.getText().toString());
-        saveInstance.putString(LOGIN_SENHA, senha.getText().toString());
-    }
-
-    @Override
-    public void onRestoreInstanceState(Bundle savedInstance) {
-        super.onRestoreInstanceState(savedInstance);
-        String nomeRecuperado = savedInstance.getString(LOGIN_NOME);
-        String senhaRecuperado = savedInstance.getString(LOGIN_SENHA);
-
-        nome.setText(nomeRecuperado);
-        senha.setText(senhaRecuperado);
-
-    }
-
 }

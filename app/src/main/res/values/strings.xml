@@ -31,7 +31,7 @@
 
     <string name="sobre">Sobre a Global Wide Tech</string>
     <string name="sobreDesc">A GWT é uma empresa de desenvolvimento de sistemas,
-    criada por estudantes do ensino médio</string>
+    criada por estudantes do ensino médio.</string>
 
     <string name="versao">Versão 1.0</string>
     <string name="perfil">Seu Perfil</string>
@@ -61,6 +61,7 @@
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="title_activity_vis_contrato">VisContrato</string>
+    <string name="no_data">Contrato não encontrado</string>
 
 
 </resources>

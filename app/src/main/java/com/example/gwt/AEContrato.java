@@ -100,19 +100,23 @@ public class AEContrato extends AppCompatActivity {
             int Value = extras.getInt("id");
             if(Value>0){
 
-                db.atualizaContrato(new Contrato( id_To_Update,
-                        nome.getText().toString(),
-                        desc.getText().toString(),
-                        Double.parseDouble(valor.getText().toString()),
-                        DataI.getText().toString(),
-                        DataF.getText().toString(),
-                        serv.getText().toString(),
-                        Integer.parseInt(CodCli.getText().toString())));
+                try {
+                    db.atualizaContrato(new Contrato(id_To_Update,
+                            nome.getText().toString(),
+                            desc.getText().toString(),
+                            Double.parseDouble(valor.getText().toString()),
+                            DataI.getText().toString(),
+                            DataF.getText().toString(),
+                            serv.getText().toString(),
+                            Integer.parseInt(CodCli.getText().toString())));
 
                     Toast.makeText(getApplicationContext(), "Atualizado", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(getApplicationContext(),VisContrato.class);
+                    Intent intent = new Intent(getApplicationContext(), VisContrato.class);
                     startActivity(intent);
                     finish();
+                }catch (Exception e){
+                    Toast.makeText(getApplicationContext(), "Código Cliente inválido", Toast.LENGTH_SHORT).show();
+                }
             }
         }
     }

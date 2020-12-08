@@ -2,15 +2,19 @@ package com.example.gwt;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Service;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 
+import java.security.Provider;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,7 +26,9 @@ public class BuscaContrato extends AppCompatActivity {
     ListView listViewBusca;
     List<Contrato> contratos;
     EditText editBusca;
+    TextView text_empty;
 
+    InputMethodManager imm;
 
     ArrayAdapter<String> adapter;
     ArrayList<String> arrayList;
@@ -35,6 +41,9 @@ public class BuscaContrato extends AppCompatActivity {
 
         listViewBusca = findViewById(R.id.listBusca);
         editBusca = findViewById(R.id.editBusca);
+        text_empty = findViewById(R.id.textViewNoData);
+
+        imm = (InputMethodManager) this.getSystemService(Service.INPUT_METHOD_SERVICE);
 
         getSupportActionBar().hide();
         DBHelper db = new DBHelper(this);
@@ -69,15 +78,29 @@ public class BuscaContrato extends AppCompatActivity {
 
         arrayList = new ArrayList<String>();
 
-        adapter = new ArrayAdapter<String>(BuscaContrato.this, android.R.layout.simple_list_item_1, arrayList);
+        if (contratos.isEmpty()) {
+            text_empty.setVisibility(View.VISIBLE);
+
+
+        } else {
+            text_empty.setVisibility(View.GONE);
+
+
+            adapter = new ArrayAdapter<String>(BuscaContrato.this, android.R.layout.simple_list_item_1, arrayList);
 
         listViewBusca.setAdapter(adapter);
 
-        for(Contrato c  : contratos){
+        for(Contrato c  : contratos) {
 
-            arrayList.add(c.getCodCon() + " - " + c.getNomeCon() + " - Entrega: " + c.getDFCon() );
+            arrayList.add(c.getCodCon() + " - " + c.getNomeCon() + " - Entrega: " + c.getDFCon());
             adapter.notifyDataSetChanged();
         }
+        }
+        escodeTeclado();
+    }
+
+    void escodeTeclado(){
+        imm.hideSoftInputFromWindow(editBusca.getWindowToken(),0);
     }
 
     //~~~~~~~~~~~~~~~~~~~SAVEINSTANCE~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

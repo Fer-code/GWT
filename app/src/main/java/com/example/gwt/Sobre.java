@@ -23,9 +23,9 @@ public class Sobre extends AppCompatActivity {
 
     public void verMapa(View mapa)
     {
-        Uri location = Uri.parse("geo: -23.5484667,-46.7450529?z=17");
-        Intent mapIntent = new Intent(Intent.ACTION_VIEW, location);
-        startActivity(mapIntent );
+            Uri location= Uri.parse("geo:0,0?q=R.+dos+Pinheiros,+1000+-+Pinheiros,+São+Paulo+-+SP,+05422-001");
+            Intent mapIntent = new Intent(Intent.ACTION_VIEW, location);
+            startActivity(mapIntent );
     }
     public void enviarEmail(View view) throws UnsupportedEncodingException {
 
@@ -37,5 +37,13 @@ public class Sobre extends AppCompatActivity {
         Intent it = new Intent(Intent.ACTION_SENDTO);
         it.setData(uri);
         startActivity(Intent.createChooser(it, "Email"));
+    }
+
+    public void fazerChamada(View view)
+    {
+        Uri uri = Uri.parse("tel:1145866383");
+        Intent it = new Intent(Intent.ACTION_DIAL, uri);
+        startActivity(it);
+
     }
 }

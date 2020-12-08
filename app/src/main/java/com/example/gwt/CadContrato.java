@@ -22,7 +22,6 @@ public class CadContrato extends AppCompatActivity {
     private final String CON_VALOR = "com.example.gwt.VALORCO";
     private final String CON_DESC = "com.example.gwt.DESCCO";
 
-    int id_To_Update = 0;
     CheckBox Banco, mobile, infra, sistema, site;
     Button btnSalvar, btnExcluir;
     EditText nome, DataI, DataF, CodCli, valor, desc;

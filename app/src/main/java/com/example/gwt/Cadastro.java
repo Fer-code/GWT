@@ -55,13 +55,16 @@ public class Cadastro extends AppCompatActivity {
                 else if  (!senha1.equals(consenha1)){
                     Toast.makeText(Cadastro.this, "As senhas não correspondem", Toast.LENGTH_SHORT).show();
                 }
-                else if (db.Validacaoemail(email1)) {
-                    Toast.makeText(Cadastro.this, "Email já utilizado", Toast.LENGTH_SHORT).show();
-
+                else if (validateEmailFormat(email1)  == true)
+                {
+                    Toast.makeText(Cadastro.this, "Email inserido incorretamente", Toast.LENGTH_SHORT).show();
                 }
                 else if (db.ValidacaoNome(nome1)) {
                     Toast.makeText(Cadastro.this, "Nome já utilizado", Toast.LENGTH_SHORT).show();
 
+                }
+                else if (db.Validacaoemail(email1)) {
+                    Toast.makeText(Cadastro.this, "Email já utilizado", Toast.LENGTH_SHORT).show();
                 }
                 else {
                     db.addUsuario(new Usuario(nome1, email1,telefone, senha1));
@@ -82,6 +85,13 @@ public class Cadastro extends AppCompatActivity {
 
     }
 
+
+    private boolean validateEmailFormat(final String email) {
+        if (android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            return false;
+        }
+        return true;
+    }
 
     //~~~~~~~~~~~~~~~~~~~~SAVEINSTANCE~~~~~~~~~~~~~~~~~~
 

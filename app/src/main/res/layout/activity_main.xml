@@ -26,35 +26,29 @@
         android:textColorHint="@android:color/white"
         android:textSize="28sp" />
 
-    <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_margin="20dp"
-        android:elevation="20dp"
-        app:cardBackgroundColor="#E6E6E6"
-        app:cardCornerRadius="40dp">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:orientation="vertical">
-
-            <EditText
-                android:id="@+id/idNomeUsuario"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:textSize="24sp"
-                android:ems="10"
-                android:hint="@string/nome"
-                android:inputType="textPersonName" />
+    <EditText
+        android:id="@+id/idNomeUsuario"
+        android:layout_width="260dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="50dp"
+        android:ems="10"
+        android:hint="@string/nome"
+        android:backgroundTint="@color/cardview_light_background"
+        android:textColor="@color/cardview_light_background"
+        android:inputType="textPersonName"
+        android:textColorHint="@android:color/background_light"
+        android:textSize="24sp" />
 
             <EditText
                 android:id="@+id/idSenhaUsuario"
-                android:layout_width="match_parent"
+                android:layout_width="260dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
+                android:layout_gravity="center"
+                android:backgroundTint="@color/cardview_light_background"
+                android:textColor="@color/cardview_light_background"
+                android:textColorHint="@color/cardview_light_background"
                 android:layout_marginTop="15dp"
                 android:textSize="24sp"
                 android:ems="10"
@@ -62,18 +56,12 @@
                 android:inputType="textPassword" />
 
 
-        </LinearLayout>
-
-    </androidx.cardview.widget.CardView>
-
-
-
     <Button
         android:id="@+id/button"
         android:layout_width="250dp"
         android:layout_height="60dp"
         android:layout_gravity="center"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="60dp"
         android:background="@drawable/botao"
         android:hint="@string/confirmar"
         android:onClick="Conf"
